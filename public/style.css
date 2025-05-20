@@ -1139,3 +1139,119 @@ footer {
   text-align: left;
 }  
 
+/* Стили формы админки для создания промо-страницы */
+.form-wrapper-admin {
+  background-color: #f8f9fa;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-wrapper-admin .form-group label {
+  color: #212529;
+  font-weight: bold;
+}
+
+/* Промо-слайдер Ledplast */
+.slider-image-wrapper {
+  width: 100%;
+  max-width: 900px; 
+  margin: auto;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slider-image-wrapper img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 700px; /* регулируй — безопасная высота */
+  object-fit: contain;
+  display: block;
+}
+
+/* Стрелки и индикатор слайдера*/
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.6); /* затемнённый фон */
+  border-radius: 50%;
+  background-size: 70% 70%;
+  padding: 20px;
+}
+
+.carousel-indicators li {
+  background-color: #000;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+.carousel-indicators .active {
+  background-color: #007bff; /* выделим активный слайд синим */
+  opacity: 1;
+}
+
+/* Таблица с фиксированной шириной ячеек */
+.table-fixed-layout {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.table-fixed-layout td,
+.table-fixed-layout th {
+  word-break: break-word;
+  word-wrap: break-word;
+  vertical-align: middle; /* по вертикали по центру */
+  text-align: center;     /* по горизонтали по центру */
+}
+
+/* Промо заголовок*/
+.promo-title {
+  font-size: 36px;
+  line-height: 1.3;
+  font-weight: 700;
+}
+
+/* .promo-title .normal-case {
+  text-transform: none;
+} */
+
+.promo-title .uppercase {
+  text-transform: uppercase;
+}
+
+@media (max-width: 992px) {
+  .promo-title {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 576px) {
+  .promo-title {
+    font-size: 22px;
+  }
+}
+
+/*Фон ячеек таблицы промо*/
+
+.highlight-red {
+  background-color: #ffe5e5; /* мягкий красноватый фон */
+  font-weight: bold;
+}
+
+.highlight-blue {
+  background-color: #e5f0ff; /* мягкий синий фон */
+  font-weight: bold;
+}
+
+/*Стили для Храрактеристики в промо*/
+
+.table-title {
+  text-align: center;
+  font-size: 1.8rem; /* Было 1.6rem — стал на "1 размер" больше */
+  font-weight: bold;
+  margin-bottom: 20px;
+}

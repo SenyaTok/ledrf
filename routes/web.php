@@ -9,6 +9,9 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LetterController;
+use App\Http\Controllers\PromoPageController;
+use App\Http\Controllers\AdminPromoPageController;
+
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
@@ -65,6 +68,29 @@ Route::post('/admin/undoMod/{id}', [AdminController::class, "undoMod"])->middlew
 Route::post('/admin/ban/{id}', [AdminController::class, "ban"])->middleware('auth')->name('ban');
 Route::post('/admin/unban/{id}', [AdminController::class, "unban"])->middleware('auth')->name('unban');
 
+// Промо-админка (только для админов, через middleware)
+Route::middleware(['auth', 'admin'])->group(function () {
+
+     // Удаление изображения из слайдера
+     Route::post('/admin/promos/{id}/image-delete/{index}', [AdminPromoPageController::class, 'deleteImage'])->name('admin.promos.image.delete');
+
+     // CRUD промо-страниц
+    Route::get('/admin/promos', [AdminPromoPageController::class, 'index'])->name('admin.promos.index');
+    Route::get('/admin/promos/create', [AdminPromoPageController::class, 'create'])->name('admin.promos.create');
+    Route::post('/admin/promos', [AdminPromoPageController::class, 'store'])->name('admin.promos.store');
+    Route::get('/admin/promos/{id}/edit', [AdminPromoPageController::class, 'edit'])->name('admin.promos.edit');
+    Route::put('/admin/promos/{id}', [AdminPromoPageController::class, 'update'])->name('admin.promos.update');
+    Route::delete('/admin/promos/{id}', [AdminPromoPageController::class, 'destroy'])->name('admin.promos.destroy');
+
+    // Управление таблицей (2 блок)
+    Route::get('/admin/promos/{id}/table', [AdminPromoPageController::class, 'tableEditor'])->name('admin.promos.table.editor');
+    Route::post('/admin/promos/{id}/table', [AdminPromoPageController::class, 'storeTableRow'])->name('admin.promos.table.store');
+    Route::put('/admin/promos/table/{rowId}', [AdminPromoPageController::class, 'updateTableRow'])->name('admin.promos.table.update');
+    Route::delete('/admin/promos/table/{rowId}', [AdminPromoPageController::class, 'deleteTableRow'])->name('admin.promos.table.delete');
+    
+
+});
+
 Route::post('/ourWork/new', [OurWorksController::class, "editor"])->middleware('auth')->name('OWnew');
 Route::get('/ourWork/{id}', [OurWorksController::class, "checkWork"])->name('OWview');
 Route::post('/ourWork/{id}/edit', [OurWorksController::class, "editor"])->middleware('auth')->name('OWedit');
@@ -85,3 +111,8 @@ Route::get('/contacts', function () { return view('contacts'); })->name('contact
 Route::get('/file/{filePath}', [PageController::class, 'file'])->name('file');
 Route::get('/articles/{ptype}', [PageController::class, 'viewPosts'])->name('viewPosts'); // в карту
 
+// Промо
+Route::get('/promo', [PromoPageController::class, 'list'])->name('promo.list');
+
+// ниже всех остальных! 
+Route::get('/{slug}', [PromoPageController::class, 'show'])->name('promo.show');

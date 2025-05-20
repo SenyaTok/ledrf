@@ -141,13 +141,15 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="{{ @route('contacts') }}">Контакты</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{ route('promo.list') }}">Промо</a>
+                </li>
                 @guest
                     <li class="nav-item">
                         <a class="nav-link active" href="{{ @route('auth') }}">Вход</a>
                     </li>
                 @endguest
                 @auth
-
                     <li class="nav-item dropdown active">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                             aria-expanded="false">
@@ -156,14 +158,16 @@
                         <div class="dropdown-menu active">
                             @if (auth()->user()->role === 1)
                                 <a class="dropdown-item text-white hov-gray"
-                                    href="{{ @route('usrRedaction') }}">Администрирование</a>
+                                    href="{{ route('usrRedaction') }}">Администрирование</a>
+                                <a class="dropdown-item text-white hov-gray"
+                                    href="{{ route('admin.promos.index') }}">Промо-страницы</a>
                             @endif
                             @if (auth()->user()->role < 3)
-                                {{-- <a class="dropdown-item text-white hov-gray" href="{{ @route('viewPosts', ['ptype' => 'Черновик']) }}">Черновики</a> --}}
+                                {{-- <a class="dropdown-item text-white hov-gray" href="{{ route('viewPosts', ['ptype' => 'Черновик']) }}">Черновики</a> --}}
                             @endif
-                            <a class="dropdown-item text-white hov-gray" href="{{ @route('cart') }}">Корзина</a>
-                            <a class="dropdown-item text-white hov-gray" href="{{ @route('user') }}">Личный кабинет</a>
-                            <form action="{{ @route('logout') }}" method="POST">
+                            <a class="dropdown-item text-white hov-gray" href="{{ route('cart') }}">Корзина</a>
+                            <a class="dropdown-item text-white hov-gray" href="{{ route('user') }}">Личный кабинет</a>
+                            <form action="{{ route('logout') }}" method="POST">
                                 @csrf
                                 <button class="lt-thin bg-bindigo border-0 dropdown-item text-white hov-gray"
                                     href="#">Выход</button>
